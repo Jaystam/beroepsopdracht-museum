@@ -1,0 +1,40 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+
+header{
+    width: 100%;
+    background: black;
+    color: white;
+    height: 70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 60%;
+}
+
+button1{
+    border: none;
+    color: white;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    background: black;
+    margin-right: 25px;
+}
+
+img{
+    margin-left: 20px;
+    margin-top: px;
+}
+
+.logo{
+    max-width: 70px;
+}
+
+h1{
+    margin-left: 20px;
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
