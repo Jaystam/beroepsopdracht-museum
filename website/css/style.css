@@ -10,30 +10,41 @@ header{
     height: 70px;
     display: flex;
     justify-content: center;
-    align-items: center;
-    gap: 80%;
 }
 
-button1{
+button{
     border: none;
+    margin-left: 1%;
     color: white;
     text-align: center;
-    font-size: 16px;
+    font-size: 100%;
     cursor: pointer;
-    background: black;
-}
-
-img{
-    margin-left: 20px;
-    margin-top: 20px;
+    background: black; 
+    justify-content: center;
+    align-items: center;
 }
 
 .logo{
     max-width: 70px;
+    justify-content: center;
+    align-items: center;
 }
 
 h1{
+    font-size: 500%;
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+} 
+
+@media screen and (max-width:1000px){
+    header{
+        height: 50px;
+    }
+    button{
+        font-size: 80%;
+    }
 }
