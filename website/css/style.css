@@ -4,6 +4,30 @@
     box-sizing: border-box;
 }
 
+body{
+}
+
+nav{
+    width: 30vw;
+    height: 100%;
+    margin: 0 auto;
+    margin-right: 20px;
+}
+
+nav > ul{
+    display: flex;
+    list-style: none;
+    height: 100%;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+}
+
+nav > ul > li{
+    font-size: large;
+}
+
 header{
     width: 100vw;
     background: black;
@@ -11,23 +35,19 @@ header{
     height: 70px;
     display: flex;
     justify-content: center;
+    gap: 20px
 }
 
-button{
-    border: none;
-    margin-left: 1%;
+a{
+    text-decoration: none;
     color: white;
-    text-align: center;
-    font-size: 100%;
-    cursor: pointer;
-    background: black;
-    align-items: center;
 }
 
 .logo{
     max-width: 70px;
     justify-content: center;
     align-items: center;
+    margin-left: 20px;
 }
 
 h1{
@@ -39,6 +59,12 @@ h1{
 } 
 
 article{
-    display: flex;
+    width: 70vw;
+    margin: 0 auto;
+    padding: 40px;
+    margin-bottom: 40px;
+}
 
+p{
+    margin: 20px;
 }
