@@ -55,6 +55,22 @@ h1{
     display: block;
 }
 
+.spel{
+    display: flex;
+    justify-content: center;
+    outline-color: black;
+    outline: auto;
+    height: 50px;
+    font-size: 200%;
+    color: black;
+    margin-bottom: 20px;
+}
+
+.spel > a{
+    height: 50px;
+    width: 100%;
+}
+
 .geschiedenis2{
     display: flex;
     justify-content: right;
