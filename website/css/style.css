@@ -4,9 +4,6 @@
     box-sizing: border-box;
 }
 
-body{
-}
-
 nav{
     width: 30vw;
     height: 100%;
@@ -51,12 +48,18 @@ a{
 }
 
 h1{
-    font-size: 500%;
+    font-size: 400%;
     margin-left: 20px;
     margin-top: 10px;
     margin-bottom: 20px;
     display: block;
-} 
+}
+
+.geschiedenis2{
+    display: flex;
+    justify-content: right;
+    margin-right: 10%;
+}
 
 article{
     width: 70vw;
@@ -67,4 +70,20 @@ article{
 
 p{
     margin: 20px;
+}
+
+.geschiedenis > img {
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+.geschiedenis{
+    display: flex;
+    margin-top: 10px;
+}
+
+footer{
+    background: black;
+    color: white;
+    height: 180px;
 }
