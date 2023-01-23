@@ -26,7 +26,7 @@ nav > ul > li{
 }
 
 header{
-    width: 100vw;
+    width: 100%;
     background: black;
     color: white;
     height: 70px;
@@ -96,6 +96,26 @@ p{
 .geschiedenis{
     display: flex;
     margin-top: 10px;
+}
+
+.reviews{
+    display: flex;
+}
+
+.review1{
+    width: 30%;
+}
+
+.review2{
+    width: 30%;
+}   
+
+.review3{
+    width: 30%;
+}
+
+.h5reviews{
+    margin-bottom: 50px;
 }
 
 footer{
