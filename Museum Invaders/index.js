@@ -1,3 +1,4 @@
+const scoreEL = document.querySelector('#scoreEL')
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
@@ -14,6 +15,7 @@ class Player {
         }
 
         this.rotation = 0
+        this.opacity = 1
 
         const image = new Image()
         image.src = './img/spaceship.png'
@@ -34,6 +36,7 @@ class Player {
         //c.fillRect(this.position.x, this.position.y, this.width, this.height)
 
         c.save()
+        c.globalAlpha = this.opacity
         c.translate(
             player.position.x + player.width / 2,
             player.position.y + player.height / 2
@@ -74,7 +77,7 @@ class Projectile {
     draw() {
         c.beginPath()
         c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
-        c.fillStyle = 'red'
+        c.fillStyle = 'blue'
         c.fill()
         c.closePath()
     }
@@ -87,13 +90,14 @@ class Projectile {
 }
 
 class Particle {
-    constructor({ position, velocity, radius, color }) {
+    constructor({ position, velocity, radius, color, fades }) {
         this.position = position
         this.velocity = velocity
 
         this.radius = radius
         this.color = color
         this.opacity = 1
+        this.fades = fades
     }
 
     draw() {
@@ -112,7 +116,8 @@ class Particle {
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
 
-        this.opacity -= 0.01
+        if (this.fades) this.opacity -= 0.01
+        
     }
 }
 
@@ -126,7 +131,7 @@ class InvaderProjectile {
     }
 
     draw() {
-        c.fillStyle = 'white'
+        c.fillStyle = 'red'
         c.fillRect(this.position.x, this.position.y, this.width,
             this.height)
     }
@@ -191,7 +196,7 @@ class Invader {
             },
             velocity: {
                 x: 0,
-                y: 5
+                y: 2
             }
         }))
 
@@ -226,7 +231,7 @@ class Grid {
                 }))
             }
         }
-        console.log(this.invaders)
+        //console.log(this.invaders)
     }
 
     update() {
@@ -265,8 +270,29 @@ const keys = {
 
 let frames = 0
 let randomInterval = Math.floor(Math.random() * 500 + 500)
+let game = {
+    over: false,
+    active: true
+}
+let score = 0
 
-function createParticles({object, color}) {
+for (let i = 0; i < 100; i++) {
+    particles.push(new Particle({
+        position: {
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height
+        },
+        velocity: {
+            x: 0,
+            y: 1
+        },
+        radius: Math.random() * 3,
+        color: 'white'
+    })
+    )
+}
+
+function createParticles({object, color, fades}) {
     for (let i = 0; i < 15; i++) {
         particles.push(new Particle({
             position: {
@@ -278,18 +304,27 @@ function createParticles({object, color}) {
                 y: (Math.random() - 0.5) * 2
             },
             radius: Math.random() * 3,
-            color: color || '#BAA0DE'
+            color: color || '#BAA0DE',
+            fades: true
         })
         )
     }
 }
 
 function animate() {
+    if (!game.active) return
     requestAnimationFrame(animate)
     c.fillStyle = 'black'
     c.fillRect(0, 0, canvas.width, canvas.height)
     player.update()
     particles.forEach((particle, i) => {
+
+        if (particle.position.y - particle.radius >= canvas.height)
+        {
+            particle.position.x = Math.random() * canvas.width
+            particle.position.y = -particle.radius
+        }
+
         if (particle.opacity <= 0) {
             setTimeout(() => {
                 particles.splice(i, 1)
@@ -299,7 +334,7 @@ function animate() {
         }
     })
 
-    console.log(particles)
+    //console.log(particles)
 
     invaderProjectiles.forEach((invaderProjectile, index) => {
         if (invaderProjectile.position.y + invaderProjectile.
@@ -314,13 +349,22 @@ function animate() {
             height >= player.position.y && invaderProjectile.position.x +
             invaderProjectile.width >= player.position.x && invaderProjectile.position.x <= player.position.x + player.width
         ) {
+            console.log("You lose")
+
             setTimeout(() => {
                 invaderProjectiles.splice(index, 1)
+                player.opacity = 0
+                game.over = true
             }, 0)
-            console.log("You lose")
+
+            setTimeout(() => {
+                game.active = false
+            }, 2000)
+
             createParticles({
                 object: player,
-                color: 'white'
+                color: 'white',
+                fades: true
             })
         }
     })
@@ -330,6 +374,8 @@ function animate() {
         if (Projectile.position.y + Projectile.radius <= 0) {
             setTimeout(() => {
                 projectiles.splice(index, 1)
+                //player.opacity = 0
+                //game.over = true
             }, 0)
         } else {
             Projectile.update()
@@ -366,8 +412,12 @@ function animate() {
 
                         //remove invader and projectile
                         if (invaderFound && projectileFound) {
+                            score += 100
+                            scoreEL.innerHTML = score
+
                             createParticles({
-                                object: invader
+                                object: invader,
+                                fades: true
                             })
                         }
 
@@ -393,10 +443,10 @@ function animate() {
     })
 
     if (keys.a.pressed && player.position.x >= 0) {
-        player.velocity.x = -7
+        player.velocity.x = -5
         player.rotation = -0.15
     } else if (keys.d.pressed && player.position.x + player.width <= canvas.width) {
-        player.velocity.x = 7
+        player.velocity.x = 5
         player.rotation = 0.15
     } else {
         player.velocity.x = 0
@@ -417,6 +467,7 @@ function animate() {
 animate()
 
 addEventListener('keydown', ({ key }) => {
+    if (game.over) return
     switch (key) {
         case 'a':
             //console.log('left')
