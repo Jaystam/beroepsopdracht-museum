@@ -98,23 +98,18 @@ p{
     margin-top: 10px;
 }
 
-.review1{
-    width: 30%;
+.reviews{
     display: flex;
+    justify-content: space-evenly;
 }
 
-.review2{
-    width: 30%;
+.reviewtext{
     display: flex;
-}   
-
-.review3{
     width: 30%;
-    display: flex;
 }
 
 .h5reviews{
-    margin-bottom: 50px;
+    
 }
 
 footer{
@@ -123,3 +118,9 @@ footer{
     height: 180px;
 }
 
+footer > p{
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
