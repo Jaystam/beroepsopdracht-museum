@@ -98,20 +98,19 @@ p{
     margin-top: 10px;
 }
 
-.reviews{
-    display: flex;
-}
-
 .review1{
     width: 30%;
+    display: flex;
 }
 
 .review2{
     width: 30%;
+    display: flex;
 }   
 
 .review3{
     width: 30%;
+    display: flex;
 }
 
 .h5reviews{
@@ -123,3 +122,4 @@ footer{
     color: white;
     height: 180px;
 }
+
